@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio de Moneda</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+#amount, #currency {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    font-size: 16px;
+    margin-bottom: 10px; /* Agrega espacio en la parte inferior */
+}
+    
+body {
+    
+    font-family: 'small-caps', serif;
+    background-color: #ebbf62;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjgmVoTItIOGlnJlt3iJzKCm8FGK7FpVZTIiYZuMkzpJmKN-dZk1fc51o8yfapWJRQ0cv2lXXcWsJgdghqKsp5NuV-uNwIlpmtujOhDb465UNlI7vfFMTZ6qxbTd12v3ajBwaKP0QRnpLc/s1600/Diferencias-entre-moneda-divisa.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Cubre todo el fondo */
+    background-position: center; /* Centra la imagen horizontal y verticalmente */
+}
+
+header {
+    background-color: #9dd3f0;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 30px; /* Borde redondeado arriba a la izquierda */
+    border-top-right-radius: 30px; /* Borde redondeado arriba a la derecha */
+    border-bottom: 2px solid #144366; /* Borde inferior sólido */
+    font-size: 24px; /* Cambia el tamaño de la letra del título a 24px */
+}
+
+
+h1 {
+    margin: 0;
+}
+
+main {
+    
+    padding: 20px;
+    text-align: center; /* Alinea el contenido al centro horizontalmente */
+    background-image: url('ruta/a/tu/imagen.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Cubre todo el fondo */
+    background-position: center; /* Centra la imagen horizontal y verticalmente */
+
+}
+
+#calculator {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0d9196;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    margin-top: 10px; /* Agrega espacio en la parte superior */
+}
+
+button:hover {
+    background-color: #74b6e9;
+}
+
+footer {
+    background-color: #9dd3f0;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+
+#history {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fdf24f;
+    border: 1px solid #0e0d0d;
+    border-radius: 5px;
+}
+
+#conversionHistory {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#conversionHistory li {
+    margin-bottom: 5px;
+    color: #d6cdcd; /* Cambia el color de la letra a gris oscuro */
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Politécnico Change</h1>
+</header>
+
+<main>
+    <section id="calculator">
+        <section id="history">
+            <h2>Historial de Conversión</h2>
+            <ul id="conversionHistory"></ul>
+        </section>
+        <h2>Calculadora de Cambio de Moneda</h2>
+        <div>
+            <label for="amount">Cantidad:</label>
+            <input type="number" id="amount">
+        </div>
+        <div>
+            <label for="currency">Moneda:</label>
+            <select id="currency">
+                <option value="EUR">Euro</option>
+                <option value="USD">Dólar</option>
+                <option value="BR">Real Brasileño</option>
+            </select>
+        </div>
+        <button onclick="convertCurrency()">Convertir</button>
+        <p id="result"></p>
+    </section>
+</main>
+
+<footer>
+    <p>Contacto: contacto@politecnicochange.com</p>
+</footer>
+<script>
+    function convertCurrency() {
+    var amount = parseFloat(document.getElementById('amount').value);
+    var currency = document.getElementById('currency').value;
+    var resultElement = document.getElementById('result');
+    
+    var exchangeRate;
+    switch(currency) {
+        case 'EUR':
+            exchangeRate = 4200; // Ejemplo de tasa de cambio EUR a COP
+            break;
+        case 'USD':
+            exchangeRate = 3600; // Ejemplo de tasa de cambio USD a COP
+            break;
+        case 'BR':
+            exchangeRate = 800; // Ejemplo de tasa de cambio BR a COP
+            break;
+        default:
+            exchangeRate = 1;
+    }
+    
+    var result = amount * exchangeRate;
+    resultElement.textContent = "Resultado: " + result.toFixed(2) + " COP";
+
+    // Agregar la conversión al historial
+    addToConversionHistory(amount, currency, result);
+}
+
+// Función para agregar la conversión al historial
+function addToConversionHistory(amount, currency, result) {
+    var conversionHistory = document.getElementById('conversionHistory');
+    var listItem = document.createElement('li');
+    listItem.textContent = amount + ' ' + currency + ' = ' + result.toFixed(2) + ' COP';
+    conversionHistory.appendChild(listItem);
+}
+
+</script>
+
+
+</body>
+</html>
